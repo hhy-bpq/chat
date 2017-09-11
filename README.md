@@ -6,6 +6,7 @@ mvn clean install
 
 ## start
 1 com.hhy.chat.ChatApplication run as java application
+
 2 http://localhost:8080/login
 
 
