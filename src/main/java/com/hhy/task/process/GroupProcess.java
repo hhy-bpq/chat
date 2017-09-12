@@ -9,31 +9,23 @@ import org.springframework.stereotype.Service;
 import com.hhy.bean.MsgData;
 import com.hhy.manager.UserSocketManager;
 /**
- * 单人聊天请求socket
+ * 组聊天信息
  * @author huanghaiyun
  * @createTime 2017年9月7日
  *
  */
 @Service
-public class P2PJoinProcess implements TaskProcess{
+public class GroupProcess implements TaskProcess{
 	@Autowired
 	private UserSocketManager socketManager;
 
 	@Override
 	public void execute(MsgData msg,WebSocket socket) {
 		socketManager.add(socket, msg);
-		String tarUser=msg.getTarUser();//目标用户
-		List<WebSocket> list=socketManager.getSocketByUser(tarUser);
-		if(list.size()>0) {
-			for(WebSocket ws:list) {
-				ws.send(msg.toJson());
-				
-			}
-		}else {
-			socket.send(msg.toJson());
-			MsgData md=new MsgData();
-			md.setErrorMsg("对方已离线!");
-			socket.send(md.toJson());
+		String room=msg.getRoom();//目标用户
+		List<WebSocket> list=socketManager.getSocketByRoom(room);
+		for(WebSocket ws:list) {
+			ws.send(msg.toJson());
 		}
 		
 	}

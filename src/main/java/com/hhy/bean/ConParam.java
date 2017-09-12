@@ -11,24 +11,32 @@ public class ConParam {
 		
 	}
 	/**
+	 * 系统信息
+	 */
+	public static final int SYS_INFO_SIZE=1;
+	/**
 	 * 单人聊天 join
 	 */
-	public static final int CHAT_P2P_JOIN=1;
+	public static final int CHAT_P2P_JOIN=10;
 	/**
 	 * 单人聊天 msg
 	 */
-	public static final int CHAT_P2P_MSG=2;
+	public static final int CHAT_P2P_MSG=11;
 	/**
 	 * 组聊天join
 	 */
-	public static final int CHAT_GROUP_JOIN=11;
+	public static final int CHAT_GROUP_JOIN=20;
 	/**
 	 * 组聊天msg
 	 */
-	public static final int CHAT_GROUP_MSG=12;
+	public static final int CHAT_GROUP_MSG=21;
 	/**
 	 * 其他socket
 	 */
-	public static final int MSG_TYPE_CHAT_OTHER=0;
+	public static final int MSG_TYPE_CHAT_OTHER=30;
+	/**
+	 * 异常socket
+	 */
+	public static final int ERROR=0;
 
 }

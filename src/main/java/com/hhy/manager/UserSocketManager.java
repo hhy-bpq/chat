@@ -29,7 +29,6 @@ public class UserSocketManager {
 	private Map<WebSocket,Map<String,String>> socketMap;//key：socket ；value:room
 	private List<WebSocket> otherList;//其他socket类型
 	public UserSocketManager() {
-		System.out.println("manager 初始化成功");
 		roomMap=new HashMap<String,List<WebSocket>>();
 		userMap=new HashMap<String,List<WebSocket>>();
 		socketMap=new HashMap<WebSocket,Map<String,String>>();
@@ -53,7 +52,10 @@ public class UserSocketManager {
 				if(list==null) {
 					list=new ArrayList<WebSocket>();
 				}
-				list.add(socket);
+				if(list.indexOf(socket)==-1) {
+					
+					list.add(socket);
+				}
 				roomMap.put(room, list);
 			}
 			synchronized (userMap) {
@@ -61,7 +63,10 @@ public class UserSocketManager {
 				if(list==null) {
 					list=new ArrayList<WebSocket>();
 				}
-				list.add(socket);
+				if(list.indexOf(socket)==-1) {
+					
+					list.add(socket);
+				}
 				userMap.put(user, list);
 			}
 			synchronized (socketMap) {

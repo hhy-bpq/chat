@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        .t1{
+            width: 100px;
+            height: 100px;
+            background-color: #00b7ee;
+        }
+        .t2{
+            width: 80px;
+            height: 80px;
+            background-color: #1cc09f;
+        }
+        .textareadiv{
+            border:1px solid;
+            resize: none;
+            height:97px;
+            width:671px;
+            padding:9px;
+            color:#848484;
+            font-size:12px;
+            overflow:auto;
+        }
+        #txtSayWords{
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+</head>
+<body>
+<div class="textareadiv">
+    <div id="txtSayWords" contenteditable="true" onfocus="AutoContents('in')" onblur="AutoContents('out')">输入您要说的话...不少于10个字</div>
+    <input type="">
+</div>
+<script src="../js/jquery.min.js?v=2.1.4"></script>
+<script src="../js/bootstrap.min.js?v=3.3.5"></script>
+<script>
+    var defaultVal = "输入您要说的话...不少于10个字"; //默认文本框内容
+    function AutoContents(type) {
+        var txtVal = $("#txtSayWords").html(); //文本框获取或失去焦点时的文本框内容
+        //文本框获取焦点
+        if (type == "in") {
+            //主动说话操作
+            if (txtVal == defaultVal) {//表示内容为空
+                //清空文本框
+                $("#txtSayWords").html("");
+            }
+        } else if (type == "out") {//文本框失去焦点
+            //如果内容为除去默认值以外的值，则需自动填充默认值+除默认值以外的
+            //主动说话操作
+            if (txtVal == "") {//没有输入内容
+                //如果焦点离开文本框时内容为空，表示没有输入任何内容，则需自动填充默认值
+                $("#txtSayWords").html(defaultVal);
+            }
+        }
+    }
+
+</script>
+</div>
+</body>
+</html>

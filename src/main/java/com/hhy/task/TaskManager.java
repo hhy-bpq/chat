@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSON;
 import com.hhy.bean.ConParam;
 import com.hhy.bean.MsgData;
+import com.hhy.task.process.CloseProcess;
+import com.hhy.task.process.GroupJoinProcess;
+import com.hhy.task.process.GroupProcess;
 import com.hhy.task.process.P2PJoinProcess;
 import com.hhy.task.process.TaskProcess;
 /**
@@ -22,11 +25,13 @@ public class TaskManager {
 	@Autowired
 	private P2PJoinProcess p2pJoin;
 	@Autowired
+	private CloseProcess close;
+	@Autowired
+	private GroupProcess group;
+	@Autowired
+	private GroupJoinProcess groupJoin;
+	@Autowired
 	private TaskExecutor taskExecutor;  
-
-	public TaskManager() {
-		System.out.println("TaskManager");
-	}
 
 	public void executeMsg(String msg,WebSocket socket) {            
 		taskExecutor.execute(new MsgTask(msg,socket)); 
@@ -46,14 +51,13 @@ public class TaskManager {
 
 		}  
 		private TaskProcess getProcess(MsgData msgData) {
-			if(msgData.getType()!=null) {
-				switch (msgData.getType()) {
-					case ConParam.CHAT_P2P_JOIN:return p2pJoin;
-					default:return p2pJoin;
-				}        	
-			}else {
-				return p2pJoin;
-			}
+			switch (msgData.getType()) {
+				case ConParam.CHAT_P2P_JOIN:return p2pJoin;
+				case ConParam.ERROR:return close;
+				case ConParam.CHAT_GROUP_MSG:return group;
+				case ConParam.CHAT_GROUP_JOIN:return groupJoin;
+				default:return close;
+			}   
 
 		}
 	}  

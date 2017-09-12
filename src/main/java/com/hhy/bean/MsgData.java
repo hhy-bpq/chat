@@ -15,6 +15,8 @@ import com.alibaba.fastjson.JSON;
 public class MsgData {
 	//发送人
 	private String user;
+	//发送人头像url
+	private String pic;
 	//socket类型
 	private Integer type;
 	//聊天室
@@ -81,20 +83,22 @@ public class MsgData {
 		this.date = date;
 	}
 
-	public String reSendData() {
-//		Map<String,String> map=new HashMap<String,String>();
-//		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//		String dateString = formatter.format(date);
-//		map.put("user", user);
-//		map.put("date", dateString);
-//		map.put("msg", msg);
+	public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
+
+	/**
+	 * 转成json 字符串
+	 * @return
+	 */
+	public String toJson() {
 		String data=JSON.toJSONString(this);
 		return data;
 		
-	}
-	public static void main(String[] args) {
-		MsgData msg=new MsgData();
-		System.out.println(msg.reSendData());
 	}
 
 }
