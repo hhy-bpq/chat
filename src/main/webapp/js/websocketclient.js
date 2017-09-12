@@ -41,7 +41,7 @@ var WebSocketClient=function(options){
         room:"all",//公共聊天室
         tarUser:"test",//所有人
         onopen:function(evt){
-            console.log("open");
+            join();
         },
         onmessage:function(evt){
             defMsgProcess(evt);
@@ -88,14 +88,6 @@ var WebSocketClient=function(options){
         websocket.onclose=function(evt){
             opts.onclose(evt);
         }
-        var data="{\"user\":\""+opts.username+"\"," +
-            "\"msg\":\""+msg+"\"," +
-            "\"type\":" +opts.type-1+","+
-            "\"room\":\""+opts.room+"\"," +
-            "\"tarUser\":\""+opts.tarUser+"\"," +
-            "\"pic\":\""+opts.pic+"\"," +
-            "}";
-        websocket.send(data);
     }
     me.sendData=function (data) {
         websocket.send(data);
@@ -152,6 +144,19 @@ var WebSocketClient=function(options){
             "\"pic\":\""+opts.pic+"\"," +
             "}";
         $("#"+opts.msgId).val("");
+        websocket.send(data);
+    }
+
+    /**
+     * 发送join 报文
+     */
+    function join(){
+        var data="{\"user\":\""+opts.username+"\"," +
+        "\"type\":" +parseInt(opts.type-1)+","+
+        "\"room\":\""+opts.room+"\"," +
+        "\"tarUser\":\""+opts.tarUser+"\"," +
+        "\"pic\":\""+opts.pic+"\"," +
+        "}";
         websocket.send(data);
     }
     return me;

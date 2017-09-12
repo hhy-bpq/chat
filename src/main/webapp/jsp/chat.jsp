@@ -29,6 +29,9 @@
             width: 750px;
             margin: 60px auto;
         }
+        .img-group{
+        	width:50px;
+        }
     </style>
 </head>
 <body class="gray-bg">
@@ -64,7 +67,7 @@
 	                        <div class="col-md-3">
 	                            <div class="group-info">
 	                                <div class=" group-info-st">
-	                                    <span><img alt="image" class="img-circle" src="img/a1.jpg"/></span>
+	                                    <span><img alt="image" class="img-circle img-group" src="img/a1.jpg"/></span>
 	                                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 	                                        <span class="clear">
 	                                            <span class="block m-t-xs"><strong class="font-bold">公共聊天室</strong></span>
