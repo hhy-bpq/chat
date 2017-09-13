@@ -17,7 +17,6 @@ public class PageController {
 		if(user==null) {
 			user=UUID.randomUUID().toString();
 		}
-		System.out.println(user);
 		model.addAttribute("user", user);
 		model.addAttribute("pic", "../img/a1.jpg");
 		return "chat";

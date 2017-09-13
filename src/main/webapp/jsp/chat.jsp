@@ -147,32 +147,6 @@
     var opt={
         username:user,
         pic:picUrl,
-        onmessage:function(evt){
-            onMsg(evt);
-        },
-    }
-    var onMsg=function(evt){
-        var msg= eval('(' + evt.data+ ')');
-        if(msg.type>9){//小于10 的是系统消息
-            var html="";
-            if(msg.user==user){
-                html+="<div class=\"chat-message chat-message-right \">\n";
-            }else{
-                html+="<div class=\"chat-message chat-message-left \">\n";
-            }
-            html+="\t                                    <img class=\"message-avatar\" src=\""+msg.pic+"\" alt=\"\">\n" +
-                "\t                                    <div class=\"message\">\n" +
-                "\t                                        <a class=\"message-author\" href=\"#\"> "+msg.user+"</a>\n" +
-                "\t                                        <span class=\"message-date\"> "+msg.date+"</span>\n" +
-                "\t                                        <span class=\"message-content\">" +decodeURI(msg.msg).replace(/\n/g,"</br>")+ "</span>\n" +
-                "\t                                    </div>\n" +
-                "\t                                </div>";
-            $("#msgDiv").append(html);
-            $("#msgTime").html("最新消息："+msg.date);
-            $("#msgDiv").scrollTop($("#msgDiv").height());
-        }else if(msg.type){
-
-        }
     }
     var websocket=WebSocketClient(opt);
     $("#commitMsg").click(function(){
