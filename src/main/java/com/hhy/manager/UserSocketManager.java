@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.java_websocket.WebSocket;
 import org.springframework.stereotype.Service;
 
-import com.hhy.bean.MsgData;
+import com.hhy.common.MsgData;
 
 /**
  * 用户socket 管理

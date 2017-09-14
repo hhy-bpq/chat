@@ -1,4 +1,4 @@
-package com.hhy.chat;
+package com.hhy;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;

@@ -1,4 +1,4 @@
-package com.hhy.bean;
+package com.hhy.common;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -10,10 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSON;
-import com.hhy.bean.ConParam;
-import com.hhy.bean.MsgData;
-import com.hhy.manager.UserSocketManager;
+import com.hhy.common.ConParam;
+import com.hhy.common.MsgData;
 import com.hhy.task.TaskManager;
 /**
  * websocket 服务端

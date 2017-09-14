@@ -1,4 +1,4 @@
-package com.hhy.bean;
+package com.hhy.common;
 
 public class ErrorMsg {
 	private ErrorMsg() {

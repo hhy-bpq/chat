@@ -8,10 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
+
 @Controller
 @EnableAutoConfiguration 
 public class PageController {
-	
 	@RequestMapping("/login")
 	public String loginPage(String user,Model model){
 		if(user==null) {

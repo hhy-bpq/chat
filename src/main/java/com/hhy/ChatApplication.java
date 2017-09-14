@@ -1,15 +1,19 @@
-package com.hhy.chat;
+package com.hhy;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 
-import com.hhy.service.WebSocketService;
 
-@ComponentScan(value = {"com.hhy.controller","com.hhy.manager","com.hhy.service","com.hhy.task"})  
+
+@ComponentScan()  
 @ImportResource(locations={"classpath:application-thread.xml"})
+@ServletComponentScan()//servlet filter 配置
 @SpringBootApplication
+@EntityScan()
 public class ChatApplication {
 
 	public static void main(String[] args) {

@@ -2,7 +2,7 @@ package com.hhy.task.process;
 
 import org.java_websocket.WebSocket;
 
-import com.hhy.bean.MsgData;
+import com.hhy.common.MsgData;
 
 /**
  * 数据处理

@@ -4,7 +4,7 @@ import org.java_websocket.WebSocket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hhy.bean.MsgData;
+import com.hhy.common.MsgData;
 import com.hhy.manager.UserSocketManager;
 /**
  * 出现异常后的处理

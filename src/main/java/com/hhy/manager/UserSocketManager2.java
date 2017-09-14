@@ -10,7 +10,7 @@ import org.apache.commons.collections.bidimap.DualHashBidiMap;
 import org.apache.commons.lang3.StringUtils;
 import org.java_websocket.WebSocket;
 
-import com.hhy.bean.MsgData;
+import com.hhy.common.MsgData;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 
 /**

@@ -6,8 +6,8 @@ import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
-import com.hhy.bean.ConParam;
-import com.hhy.bean.MsgData;
+import com.hhy.common.ConParam;
+import com.hhy.common.MsgData;
 import com.hhy.task.process.CloseProcess;
 import com.hhy.task.process.GroupJoinProcess;
 import com.hhy.task.process.GroupProcess;
