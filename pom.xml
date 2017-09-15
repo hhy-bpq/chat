@@ -102,7 +102,15 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
-
+		
+		<!-- spring的热部署，在改代码后 自动部署不用重启  
+		好像存在部分问题，自己开的服务，
+		占用的端口在热部署的时候，不会释放。导致修改代码后，websocket启动失败，还是需要重新启动-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional><!-- optional=true,依赖不会传递，该项目依赖devtools；之后依赖myboot项目的项目如果想要使用devtools，需要重新引入 -->
+		</dependency>
 
 	</dependencies>
 

@@ -26,7 +26,6 @@ public class WebSocketService extends WebSocketServer{
 	private TaskManager manager;
 	private String errorData;
 	
-//	private static final WebSocketServices INSTANCE=new WebSocketServices(new InetSocketAddress(7897));//改成低版本协议，支持低版本火狐等
 	private static final Logger LOG =  LoggerFactory.getLogger(WebSocketService.class);
 	
 	public WebSocketService(){
@@ -36,10 +35,6 @@ public class WebSocketService extends WebSocketServer{
 		errorData=msg.toJson();
 		this.start();
 	}
-//	public static WebSocketServices getInstance(){
-//		LOG.info("初始化成功");
-//		return INSTANCE;
-//	}
 
 	@Override
 	public void onClose(WebSocket webScoket, int arg1, String arg2, boolean arg3) {
