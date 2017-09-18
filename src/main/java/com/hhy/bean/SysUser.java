@@ -1,11 +1,16 @@
 package com.hhy.bean;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -34,6 +39,11 @@ public class SysUser extends BaseBean{
 	CascadeType.ALL:以上四种都是；*/ 
 	@ManyToOne(optional = false,cascade = CascadeType.ALL)
     private SysPerson person;// 用户表外键
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable( name = "sys_user_role",joinColumns = { @JoinColumn(name = "role_id") }, inverseJoinColumns = {
+            @JoinColumn(name = "user_id") }) //被控方表字段名
+	private Set<SysRole> roleSet;
 
 	public Long getId() {
 		return id;
@@ -67,6 +77,14 @@ public class SysUser extends BaseBean{
 	@JsonBackReference
 	public void setPerson(SysPerson person) {
 		this.person = person;
+	}
+
+	public Set<SysRole> getRoleSet() {
+		return roleSet;
+	}
+
+	public void setRoleSet(Set<SysRole> roleSet) {
+		this.roleSet = roleSet;
 	}
 
 }
