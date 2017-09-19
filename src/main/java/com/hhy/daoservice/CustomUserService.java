@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 import com.hhy.bean.SysRole;
 import com.hhy.bean.SysUser;
 import com.hhy.dao.SysUserDao;
-import com.hhy.service.WebSocketService;
-
 import java.util.ArrayList;
 import java.util.List;
 
