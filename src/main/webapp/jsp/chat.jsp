@@ -6,6 +6,7 @@
 <title>Insert title here</title>
     <link href="../css/bootstrap.3.0.min.css" rel="stylesheet">
     <link href="../css/style1.css" rel="stylesheet">
+	<link href="../css/animate.min.css" rel="stylesheet">
 	<script src="../js/jquery-1.11.0.min.js"></script>
 	<script src="../js/bootstrap.3.0.min.js"></script>
 	<script src="../js/websocketclient.js"></script>
@@ -35,7 +36,7 @@
     </style>
 </head>
 <body class="gray-bg">
-	<div class="wrapper wrapper-content content-chat">
+	<div class="wrapper wrapper-content content-chat animated fadeInDown">
 	
 	    <div class="row">
 	        <div class="col-sm-12">

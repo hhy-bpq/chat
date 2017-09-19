@@ -24,22 +24,18 @@ public class PageController {
 	@Autowired
 	private SysPersonDao personDao;
 	
-	@RequestMapping("/login")
+	@RequestMapping("/chat")
 	public String loginPage(String user,Model model){
 		if(user==null) {
 			user=UUID.randomUUID().toString();
 		}
-		SysUser entity=new SysUser();
-		entity.setPassWord("2w1");
-		entity.setAccount("adsa");
-		SysPerson person=new SysPerson();
-		person.setName("asdsad123");
-		entity.setPerson(person);
-		userDao.save(entity);
-		
-		System.out.println(personDao.getOne(1L).toJsonString());
-		System.out.println("=================================");
-		System.out.println(JSON.toJSONString(personDao.findPersonByName("hhy")));
+//		SysUser entity=new SysUser();
+//		entity.setPassWord("2w1");
+//		entity.setAccount("adsa");
+//		SysPerson person=new SysPerson();
+//		person.setName("asdsad123");
+//		entity.setPerson(person);
+//		userDao.save(entity);
 		model.addAttribute("user", user);
 		model.addAttribute("pic", "../img/a1.jpg");
 		return "chat";

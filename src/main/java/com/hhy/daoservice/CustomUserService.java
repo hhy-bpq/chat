@@ -23,24 +23,23 @@ public class CustomUserService implements UserDetailsService { //自定义UserDe
 
 	private static final Logger LOG =  LoggerFactory.getLogger(CustomUserService.class);
 
-    @Autowired
-    SysUserDao userDao;
+	@Autowired
+	SysUserDao userDao;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) { //重写loadUserByUsername 方法获得 userdetails 类型用户
+	@Override
+	public UserDetails loadUserByUsername(String username) { //重写loadUserByUsername 方法获得 userdetails 类型用户
 
-        SysUser user = userDao.findByAccount(username);
-        if(user == null){
-            throw new UsernameNotFoundException("用户名不存在");
-        }
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        //用于添加用户的权限。只要把用户权限添加到authorities 就万事大吉。
-        for(SysRole role:user.getRoleSet())
-        {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-            LOG.info(role.getName());
-        }
-        return new org.springframework.security.core.userdetails.User(user.getAccount(),
-                user.getPassWord(), authorities);
-    }
+		SysUser user = userDao.findByAccount(username);
+		if(user == null){
+			throw new UsernameNotFoundException("用户名不存在");
+		}
+		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+		//用于添加用户的权限。只要把用户权限添加到authorities 就万事大吉。
+		for(SysRole role:user.getRoleSet()){
+			authorities.add(new SimpleGrantedAuthority(role.getName()));
+			LOG.info(role.getName());
+		}
+		return new org.springframework.security.core.userdetails.User(user.getAccount(),
+				user.getPassWord(), authorities);
+	}
 }

@@ -1,6 +1,7 @@
 package com.hhy.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -25,13 +26,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customUserService()); //user Details Service验证
+        auth.userDetailsService(customUserService())
+        .passwordEncoder(passwordEncoder()); //user Details Service验证
+
+    }
+
+    /**
+     * 设置用户密码的加密方式为MD5加密
+     * @return
+     */
+    @Bean
+    public Md5PasswordEncoder passwordEncoder() {
+        return new Md5PasswordEncoder();
 
     }
     @Override
     public void configure(WebSecurity web) throws Exception {
- 
-        web.ignoring().antMatchers("/js/**","/img/**","/css/**","/**/*.jsp");
+        web.ignoring().antMatchers("/js/**","/img/**","/css/**","/html/**");//忽略静态资源
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -46,10 +57,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //开启cookie保存用户数据
                 .rememberMe()
                 //设置cookie有效期
-                .tokenValiditySeconds(60 * 60 * 24 * 7) //登录页面用户任意访问
+                .tokenValiditySeconds(60 * 60 * 24 * 7)//登录页面用户任意访问
                 .and()
-                .logout().permitAll(); //注销行为任意访问
-
-
+                .logout().permitAll();//注销行为任意访问
     }
+
 }
