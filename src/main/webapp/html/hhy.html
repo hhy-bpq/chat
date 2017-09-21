@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvasTest</title>
+    
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        body{
+            overflow: hidden;
+        }
+    </style>
+</head>
+<bosy>
+    <i id="test" class="fa fa-500px"></i>
+<canvas id='cas' >浏览器不支持canvas</canvas>
+<script>
+    var radius=3;//用来 显示内容的点的 半径
+    var canDiv=document.getElementById("cas");//显示的画板
+    var canContext=canDiv.getContext('2d');
+    var canHeight=window.innerHeight;
+    var canWidth=window.innerWidth;
+    canDiv.height=canHeight;
+    canDiv.width=canWidth;
+    var dots=[];
+    var Point=function(x,y,z){//粒子效果的 小圆点
+        var point={
+            //中间过程 位置
+            x:Math.random()*canWidth*1.5,//X轴
+            y:Math.random()*canHeight*1.5,//y轴
+            z:Math.random()*canHeight - canHeight/2,//z轴 用来控制半径大小,以及透明度，制造3D效果  有负有正
+            radi:radius,//半径  与采样间隔有关
+            //组成字体的位置
+            sx:x,
+            sy:y,
+            sz:z,
+            //结束位置(随机生成)
+            ex:Math.random()*canWidth*1.5,
+            ey:Math.random()*canHeight*1.5,
+            ez:Math.random()*canHeight - canHeight/2,
+
+        };
+        var drawPoint=function(context,canvas){
+            context.save();
+            context.beginPath();
+//            var scale = point.z;
+//            if(Math.random()>0.5){
+//                scale=1+scale;
+//            }
+            var scale = canHeight/2/(canHeight/2 + point.z);
+           context.arc(canHeight/2 + (point.x-canHeight/2)*scale , canHeight/2 + (point.y-canHeight/2) * scale, point.radi*scale  , 0 , 2*Math.PI);
+//            context.arc(point.x ,point.y, point.radi*scale  , 0 , 2*Math.PI);
+            context.fillStyle = "rgba(50,50,50,"+ scale +")";
+            context.fill();
+            context.restore();
+        };
+        return {
+            point:point,
+            paint:drawPoint
+        };
+    };
+
+    /**
+     * 将文字转换成 图片
+     * @param text
+     * @returns {Array}
+     */
+    function getTextImageData(text){
+        var textCan=document.createElement("canvas");//创建一个画板用来画 文字并将文字转换成图片，将图片像素 数据 返回
+        textCan.height=canHeight;
+        textCan.width=canWidth;
+        var context=textCan.getContext('2d');
+        context.font = "300px 微软雅黑 bold";
+        context.fillStyle = "rgba(168,168,168,1)";
+        context.textAlign = "center";
+        context.textBaseline = "middle";
+        context.fillText(text , textCan.width/2 , textCan.height/2);
+        var imgData = context.getImageData(0,0,textCan.width , textCan.height);
+        context.clearRect(0,0,textCan.width , textCan.height);
+        var dots = [];
+        for(var x=0;x<imgData.width;x+=6){//6  是应为采样点要是半径的两倍，为了使画的小点 可以连接起来不会重叠也不会，断开
+            for(var y=0;y<imgData.height;y+=6){
+                var i = (y*imgData.width + x)*4;
+                if(imgData.data[i] >= 128){
+                    var dot = new Point(x , y , 0);
+                    dots.push(dot);
+                }
+            }
+        }
+        return dots;
+    }
+    /**
+     * 将字体图标转换成 图片
+     * @param id
+     * @returns {Array}
+     */
+    function getIconImageData(unicode){
+        var iconCan=document.createElement("canvas");//创建一个画板用来画 文字并将文字转换成图片，将图片像素 数据 返回
+        iconCan.height=canHeight;
+        iconCan.width=canWidth;
+        var context=iconCan.getContext('2d');
+        context.font = "300px FontAwesome";
+        context.fillStyle = "rgba(168,168,168,1)";
+        context.textAlign = "center";
+        context.textBaseline = "middle";
+        context.fillText(unicode , iconCan.width/2 , iconCan.height/2);
+        var imgData = context.getImageData(0,0,iconCan.width , iconCan.height);
+        context.clearRect(0,0,iconCan.width , iconCan.height);
+        var dots = [];
+        for(var x=0;x<imgData.width;x+=6){//6  是应为采样点要是半径的两倍，为了使画的小点 可以连接起来不会重叠也不会，断开
+            for(var y=0;y<imgData.height;y+=6){
+                var i = (y*imgData.width + x)*4;
+                if(imgData.data[i] >= 128){
+                    var dot = new Point(x , y , 0);
+                    dots.push(dot);
+                }
+            }
+        }
+        return dots;
+    }
+    /**
+     * 开始执行动画
+     */
+    function start(){
+        dots=getTextImageData("asdasd");
+//        dos.forEach(function(val){
+//            val.paint(canContext,canDiv);
+//        })
+        dots.forEach(function(val){
+            val.paint(canContext,canDiv);
+        });
+        action();
+    }
+    //计算帧速率
+    //计算帧速率
+    var lastTime= new Date();
+    var derection = true;
+    var pause;
+    function action(){
+        animateRunning = true;
+        var thisTime = new Date();
+        canContext.clearRect(0,0,canDiv.width , canDiv.height);
+        dots.forEach(function(val){
+            var dot = val.point;
+            if(derection){
+                if (Math.abs(dot.sx - dot.x) < 0.1 && Math.abs(dot.sy - dot.y) < 0.1 && Math.abs(dot.sz - dot.z)<0.1) {
+                    dot.x = dot.sx;
+                    dot.y = dot.sy;
+                    dot.z = dot.sz;
+                    if(thisTime - lastTime >300) {
+                        derection = false;
+                    }
+                } else {
+                    dot.x = dot.x + (dot.sx - dot.x) * 0.1;
+                    dot.y = dot.y + (dot.sy - dot.y) * 0.1;
+                    dot.z = dot.z + (dot.sz - dot.z) * 0.1;
+                    lastTime = new Date();
+                }
+            }
+            else {
+                if (Math.abs(dot.ex - dot.x) < 0.1 && Math.abs(dot.ey - dot.y) < 0.1 && Math.abs(dot.ez - dot.z)<0.1) {
+                    dot.x = dot.ex;
+                    dot.y = dot.ey;
+                    dot.z = dot.ez;
+                    pause = true;
+                } else {
+                    dot.x = dot.x + (dot.ex - dot.x) * 0.1;
+                    dot.y = dot.y + (dot.ey - dot.y) * 0.1;
+                    dot.z = dot.z + (dot.ez - dot.z) * 0.1;
+                    pause = false;
+                }
+            }
+            val.paint(canContext,canDiv);
+        });
+        if(!pause) {
+            if("requestAnimationFrame" in window){
+                requestAnimationFrame(action);
+            }else if("webkitRequestAnimationFrame" in window){
+                webkitRequestAnimationFrame(animate);
+            }
+            else if("msRequestAnimationFrame" in window){
+                msRequestAnimationFrame(animate);
+            }
+            else if("mozRequestAnimationFrame" in window){
+                mozRequestAnimationFrame(animate);
+            }
+        }
+    }
+//    start();
+    function test(){
+        dots=getIconImageData("&#61554;");
+//        dos.forEach(function(val){
+//            val.paint(canContext,canDiv);
+//        })
+        dots.forEach(function(val){
+            val.paint(canContext,canDiv);
+        });
+        action();
+    }
+    var s="{\"total\":866,\"rows\":[{\"alia\":\"201709_2115_5123\",\"createtime\":\"20170921155000\",\"duration\":\"682\",\"name\":\"201709_2115_5123.asf\"},{\"alia\":\"201709_2114_5055\",\"createtime\":\"20170921144931\",\"duration\":\"2\",\"name\":\"201709_2114_5055.asf\"},{\"alia\":\"201709_2114_5103\",\"createtime\":\"20170921144939\",\"duration\":\"2\",\"name\":\"201709_2114_5103.asf\"},{\"alia\":\"201709_2114_1459\",\"createtime\":\"20170921141335\",\"duration\":\"177\",\"name\":\"201709_2114_1459.asf\"},{\"alia\":\"201709_2111_1623\",\"createtime\":\"20170921111459\",\"duration\":\"8989\",\"name\":\"201709_2111_1623.asf\"},{\"alia\":\"201709_2113_5134\",\"createtime\":\"20170921135010\",\"duration\":\"1398\",\"name\":\"201709_2113_5134.asf\"},{\"alia\":\"201709_2109_2545\",\"createtime\":\"20170921092421\",\"duration\":\"6566\",\"name\":\"201709_2109_2545.asf\"},{\"alia\":\"201709_2016_3543\",\"createtime\":\"20170920163421\",\"duration\":\"3695\",\"name\":\"201709_2016_3543.asf\"},{\"alia\":\"201709_2014_5133\",\"createtime\":\"20170920145012\",\"duration\":\"160\",\"name\":\"201709_2014_5133.asf\"},{\"alia\":\"201709_2012_3532\",\"createtime\":\"20170920123411\",\"duration\":\"0\",\"name\":\"201709_2012_3532.asf\"}]}"
+    test();
+</script>
+</bosy>
+</html>
