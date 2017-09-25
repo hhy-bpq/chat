@@ -8,8 +8,10 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.hhy.daoservice.CustomUserService;
+import com.hhy.util.MD5Util;
 /**
  * security 配置
  * @author huanghaiyun
@@ -20,46 +22,46 @@ import com.hhy.daoservice.CustomUserService;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Bean
-    UserDetailsService customUserService(){ //注册UserDetailsService 的bean
-        return new CustomUserService();
-    }
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customUserService())
-        .passwordEncoder(passwordEncoder()); //user Details Service验证
+	@Bean
+	UserDetailsService customUserService(){ //注册UserDetailsService 的bean
+		return new CustomUserService();
+	}
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(customUserService())
+		.passwordEncoder(new PasswordEncoder(){
 
-    }
+			@Override
+			public String encode(CharSequence rawPassword) {
+				return MD5Util.encode((String)rawPassword);
+			}
 
-    /**
-     * 设置用户密码的加密方式为MD5加密
-     * @return
-     */
-    @Bean
-    public Md5PasswordEncoder passwordEncoder() {
-        return new Md5PasswordEncoder();
+			@Override
+			public boolean matches(CharSequence rawPassword, String encodedPassword) {
+				return encodedPassword.equals(MD5Util.encode((String)rawPassword));
+			}}); //user Details Service验证
+	}
 
-    }
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/js/**","/img/**","/css/**","/html/**");//忽略静态资源
-    }
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .anyRequest().authenticated() //任何请求,登录后可以访问
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .failureUrl("/login?error")
-                .permitAll()
-                .and()
-                //开启cookie保存用户数据
-                .rememberMe()
-                //设置cookie有效期
-                .tokenValiditySeconds(60 * 60 * 24 * 7)//登录页面用户任意访问
-                .and()
-                .logout().permitAll();//注销行为任意访问
-    }
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests()
+			.antMatchers("/js/**","/img/**","/css/**","/html/**").permitAll() 
+			.anyRequest().authenticated()//任何请求,登录后可以访问
+			.and()
+			.formLogin()
+			.loginPage("/login")//登陆提交的处理url
+			.failureUrl("/login?error")
+			.defaultSuccessUrl("/chat")//登录成功的 跳转url
+			.permitAll()
+			.and()
+			.logout()
+			.logoutUrl("/logout").permitAll()//退出url 
+			.logoutSuccessUrl("/?logout=true")//退出成功后跳转的url
+			.and()
+			//开启cookie保存用户数据
+			.rememberMe()
+			//设置cookie有效期
+			.tokenValiditySeconds(60 * 60 * 24 * 7);//登录页面用户任意访问
+	}
 
 }
