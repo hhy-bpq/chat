@@ -13,9 +13,10 @@
 <textarea id="msg" type="text"></textarea><input type="button" id="btn" value="发送"/>
 <script type="text/javascript">
 
+// 路径： ws://ip:port
 var wsUri='ws://'+window.location.hostname+':7897';//创建的websocket连接路径，
-var websocket;
-var WEB_SOCKET_SWF_LOCATION="./js/WebSocketMain.swf" ;
+var websocket;//websocket对象
+var WEB_SOCKET_SWF_LOCATION="./js/WebSocketMain.swf" ;//需要指明flash 代码的存放位置
 (function() {
 	webSocketInit();
 })();

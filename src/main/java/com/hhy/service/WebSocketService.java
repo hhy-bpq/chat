@@ -29,7 +29,7 @@ public class WebSocketService extends WebSocketServer{
 	private static final Logger LOG =  LoggerFactory.getLogger(WebSocketService.class);
 	
 	public WebSocketService(){
-		super(new InetSocketAddress(7897));
+		super(new InetSocketAddress(7897));//参数是 websocket服务的端口号
 		MsgData msg=new MsgData();
 		msg.setType(ConParam.ERROR);
 		errorData=msg.toJson();

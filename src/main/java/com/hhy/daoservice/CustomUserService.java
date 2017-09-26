@@ -15,9 +15,8 @@ import com.hhy.dao.SysUserDao;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by yangyibo on 17/1/18.
- */
+import javax.transaction.Transactional;
+
 @Service
 public class CustomUserService implements UserDetailsService { //自定义UserDetailsService 接口
 
@@ -27,9 +26,9 @@ public class CustomUserService implements UserDetailsService { //自定义UserDe
 	SysUserDao userDao;
 
 	@Override
+	@Transactional
 	public UserDetails loadUserByUsername(String username) { //重写loadUserByUsername 方法获得 userdetails 类型用户
-
-		SysUser user = userDao.findByAccount(username);
+		SysUser user = userDao.findByUserName(username);
 		if(user == null){
 			throw new UsernameNotFoundException("用户名不存在");
 		}
@@ -39,7 +38,7 @@ public class CustomUserService implements UserDetailsService { //自定义UserDe
 			authorities.add(new SimpleGrantedAuthority(role.getName()));
 			LOG.info(role.getName());
 		}
-		return new org.springframework.security.core.userdetails.User(user.getAccount(),
+		return new org.springframework.security.core.userdetails.User(user.getUserName(),
 				user.getPassWord(), authorities);
 	}
 }

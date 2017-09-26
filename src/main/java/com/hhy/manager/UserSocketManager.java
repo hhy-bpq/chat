@@ -141,4 +141,31 @@ public class UserSocketManager {
 			return list;
 		}
 	}
+
+	/**
+	 * 根据socket 获取room 
+	 * @param socket
+	 */
+	public String getRoomBySocket(WebSocket socket) {
+		synchronized (socketMap) {
+			Map<String,String> map=socketMap.get(socket);
+			if(map==null) {
+				return "";
+			}
+			return map.get(ROOM);
+		}
+	}
+	/**
+	 * 根据socket 获取user 
+	 * @param socket
+	 */
+	public String getUserBySocket(WebSocket socket) {
+		synchronized (socketMap) {
+			Map<String,String> map=socketMap.get(socket);
+			if(map==null) {
+				return "";
+			}
+			return map.get(USER);
+		}
+	}
 }

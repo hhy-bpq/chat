@@ -25,10 +25,12 @@ public class MsgData {
 	private String msg;
 	//接收人
 	private String tarUser;
-	//实际数据
+	//错误数据
 	private String errorMsg;
 	//创建时间
 	private String date;
+	
+	private String otherData;
 	public MsgData() {
 		Map<String,String> map=new HashMap<String,String>();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

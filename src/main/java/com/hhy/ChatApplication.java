@@ -8,9 +8,7 @@ import org.springframework.context.annotation.ImportResource;
 
 
 
-@ComponentScan()  
 @ImportResource(locations={"classpath:application-thread.xml"})
-@ServletComponentScan()//servlet filter 配置
 @SpringBootApplication
 public class ChatApplication {
 

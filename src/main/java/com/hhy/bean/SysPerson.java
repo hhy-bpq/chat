@@ -35,7 +35,7 @@ public class SysPerson extends BaseBean{
 	@Column(name = "avatar")
 	private String avatar;
 	
-	@OneToMany(mappedBy = "person",fetch=FetchType.LAZY)
+	@OneToMany(mappedBy = "person")
     private Set<SysUser> userSet;
 
 	public Long getId() {

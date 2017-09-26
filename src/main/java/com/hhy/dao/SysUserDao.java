@@ -6,7 +6,7 @@ import com.hhy.bean.SysUser;
 
 public interface SysUserDao extends JpaRepository<SysUser, Long> {
 	
-	public SysUser findByAccount(String name);
+	public SysUser findByUserName(String name);
 
 
 }

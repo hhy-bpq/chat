@@ -76,59 +76,59 @@
 	                                    </a>
 	                                </div>
 	                            </div>
-	                            <div class="chat-users">
-	                                <div class="users-list">
-	                                    <div class="chat-user">
-	                                        <img class="chat-avatar" src="img/a1.jpg" alt="">
-	                                        <div class="chat-user-name">
-	                                            <a href="#">hhy</a>
-	                                        </div>
-	                                    </div>
-	                                    <div class="chat-user">
-	                                        <img class="chat-avatar" src="img/a1.jpg" alt="">
-	                                        <div class="chat-user-name">
-	                                            <a href="#">123</a>
-	                                        </div>
-	                                    </div>
-	                                    <div class="chat-user">
-	                                        <span class="pull-right label label-primary">在线</span>
-	                                        <img class="chat-avatar" src="img/a1.jpg" alt="">
-	                                        <div class="chat-user-name">
-	                                            <a href="#">456</a>
-	                                        </div>
-	                                    </div>
-	                                    <div class="chat-user">
-	                                        <span class="pull-right label label-primary">在线</span>
-	                                        <img class="chat-avatar" src="img/a1.jpg" alt="">
-	                                        <div class="chat-user-name">
-	                                            <a href="#">qwe	</a>
-	                                        </div>
-	                                    </div>
-	                                    <div class="chat-user">
-	                                        <img class="chat-avatar" src="img/a1.jpg" alt="">
-	                                        <div class="chat-user-name">
-	                                            <a href="#">xxx</a>
-	                                        </div>
-	                                    </div>
-	                                    <div class="chat-user">
-	                                        <img class="chat-avatar" src="img/a1.jpg" alt="">
-	                                        <div class="chat-user-name">
-	                                            <a href="#">qqqq</a>
-	                                        </div>
-	                                    </div>
-	                                    <div class="chat-user">
-	                                        <img class="chat-avatar" src="img/a1.jpg" alt="">
-	                                        <div class="chat-user-name">
-	                                            <a href="#">333</a>
-	                                        </div>
-	                                    </div>
-	                                    <div class="chat-user">
-	                                        <span class="pull-right label label-primary">在线</span>
-	                                        <img class="chat-avatar" src="img/a1.jpg" alt="">
-	                                        <div class="chat-user-name">
-	                                            <a href="#">ddd</a>
-	                                        </div>
-	                                    </div>
+	                            <div class="chat-users" >
+	                                <div class="users-list" id="userList">
+	                                    <!--<div class="chat-user" id="">-->
+	                                        <!--<img class="chat-avatar" src="img/a1.jpg" alt="">-->
+	                                        <!--<div class="chat-user-name">-->
+	                                            <!--<a href="#">hhy</a>-->
+	                                        <!--</div>-->
+	                                    <!--</div>-->
+	                                    <!--<div class="chat-user">-->
+	                                        <!--<img class="chat-avatar" src="img/a1.jpg" alt="">-->
+	                                        <!--<div class="chat-user-name">-->
+	                                            <!--<a href="#">123</a>-->
+	                                        <!--</div>-->
+	                                    <!--</div>-->
+	                                    <!--<div class="chat-user">-->
+	                                        <!--<span class="pull-right label label-primary">在线</span>-->
+	                                        <!--<img class="chat-avatar" src="img/a1.jpg" alt="">-->
+	                                        <!--<div class="chat-user-name">-->
+	                                            <!--<a href="#">456</a>-->
+	                                        <!--</div>-->
+	                                    <!--</div>-->
+	                                    <!--<div class="chat-user">-->
+	                                        <!--<span class="pull-right label label-primary">在线</span>-->
+	                                        <!--<img class="chat-avatar" src="img/a1.jpg" alt="">-->
+	                                        <!--<div class="chat-user-name">-->
+	                                            <!--<a href="#">qwe	</a>-->
+	                                        <!--</div>-->
+	                                    <!--</div>-->
+	                                    <!--<div class="chat-user">-->
+	                                        <!--<img class="chat-avatar" src="img/a1.jpg" alt="">-->
+	                                        <!--<div class="chat-user-name">-->
+	                                            <!--<a href="#">xxx</a>-->
+	                                        <!--</div>-->
+	                                    <!--</div>-->
+	                                    <!--<div class="chat-user">-->
+	                                        <!--<img class="chat-avatar" src="img/a1.jpg" alt="">-->
+	                                        <!--<div class="chat-user-name">-->
+	                                            <!--<a href="#">qqqq</a>-->
+	                                        <!--</div>-->
+	                                    <!--</div>-->
+	                                    <!--<div class="chat-user">-->
+	                                        <!--<img class="chat-avatar" src="img/a1.jpg" alt="">-->
+	                                        <!--<div class="chat-user-name">-->
+	                                            <!--<a href="#">333</a>-->
+	                                        <!--</div>-->
+	                                    <!--</div>-->
+	                                    <!--<div class="chat-user">-->
+	                                        <!--<span class="pull-right label label-primary">在线</span>-->
+	                                        <!--<img class="chat-avatar" src="img/a1.jpg" alt="">-->
+	                                        <!--<div class="chat-user-name">-->
+	                                            <!--<a href="#">ddd</a>-->
+	                                        <!--</div>-->
+	                                    <!--</div>-->
 	
 	
 	                                </div>

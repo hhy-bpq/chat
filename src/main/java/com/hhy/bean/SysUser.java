@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,8 +27,8 @@ public class SysUser extends BaseBean{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 
-	@Column(name = "account")
-	private String account;
+	@Column(name = "username")
+	private String userName;
 
 	@Column(name = "password")
 	private String passWord;
@@ -37,12 +38,12 @@ public class SysUser extends BaseBean{
 	CascadeType.REMOVE:级联删除； 
 	CascadeType.REFRESH:级联刷新 
 	CascadeType.ALL:以上四种都是；*/ 
-	@ManyToOne(optional = false,cascade = CascadeType.ALL)
+	@ManyToOne(optional = false,cascade = CascadeType.ALL/*,fetch=FetchType.EAGER*/)
     private SysPerson person;// 用户表外键
 
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable( name = "sys_user_role",joinColumns = { @JoinColumn(name = "role_id") }, inverseJoinColumns = {
-            @JoinColumn(name = "user_id") }) //被控方表字段名
+	@JoinTable( name = "sys_user_role",joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
+            @JoinColumn(name = "role_id") }) //被控方表字段名
 	private Set<SysRole> roleSet;
 
 	public Long getId() {
@@ -53,13 +54,12 @@ public class SysUser extends BaseBean{
 		this.id = id;
 	}
 
-
-	public String getAccount() {
-		return account;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setAccount(String account) {
-		this.account = account;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getPassWord() {

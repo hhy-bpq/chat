@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import com.alibaba.druid.pool.DruidDataSource;
 
@@ -110,5 +111,13 @@ public class DruidDBConfig {
 		datasource.setConnectionProperties(connectionProperties);
 
 		return datasource;
+	}
+	/**
+	 * 配置事务管理器
+	 */
+	@Bean
+	@Primary
+	public DataSourceTransactionManager transactionManager() throws Exception{
+		return new DataSourceTransactionManager(dataSource());
 	}
 }
