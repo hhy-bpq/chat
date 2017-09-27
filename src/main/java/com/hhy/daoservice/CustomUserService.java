@@ -36,7 +36,6 @@ public class CustomUserService implements UserDetailsService { //自定义UserDe
 		//用于添加用户的权限。只要把用户权限添加到authorities 就万事大吉。
 		for(SysRole role:user.getRoleSet()){
 			authorities.add(new SimpleGrantedAuthority(role.getName()));
-			LOG.info(role.getName());
 		}
 		return new org.springframework.security.core.userdetails.User(user.getUserName(),
 				user.getPassWord(), authorities);

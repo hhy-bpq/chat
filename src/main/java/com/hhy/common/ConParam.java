@@ -43,6 +43,10 @@ public class ConParam {
 	 */
 	public static final int MSG_TYPE_CHAT_ONLINE=32;
 	/**
+	 * 上线
+	 */
+	public static final int SYS_NOT_ALLOW=405;
+	/**
 	 * 异常socket
 	 */
 	public static final int ERROR=0;

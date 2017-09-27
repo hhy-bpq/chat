@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 /**
@@ -39,11 +40,9 @@ public class SysPermission extends BaseBean {
 	@Column
     private String url;
 
-    //父节点id
-	@Column
-    private Integer pid;
-
-	@ManyToMany(mappedBy = "permSet",fetch=FetchType.EAGER)//mapperdBy 防止两边重复建表
+	
+	@JSONField(serialize=false)  
+	@ManyToMany(mappedBy = "permSet")//mapperdBy 防止两边重复建表
 	private Set<SysRole> roleSet;
 
     public int getId() {
@@ -78,19 +77,10 @@ public class SysPermission extends BaseBean {
         this.url = url;
     }
 
-    public Integer getPid() {
-        return pid;
-    }
-
-    public void setPid(Integer pid) {
-        this.pid = pid;
-    }
-
 	public Set<SysRole> getRoleSet() {
 		return roleSet;
 	}
 
-	@JsonBackReference
 	public void setRoleSet(Set<SysRole> roleSet) {
 		this.roleSet = roleSet;
 	}

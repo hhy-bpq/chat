@@ -44,7 +44,7 @@
 	            <div class="ibox chat-view">
 	
 	                <div class="ibox-title">
-	                    <small class="pull-right text-muted" id="msgTime">最新消息：</small> 聊天窗口
+	                    <small class="pull-right text-muted" id="msgTime">最新消息：无</small> 聊天窗口
 	                </div>
 	
 	
@@ -145,9 +145,11 @@
 <script type="text/javascript">
     var user="${user}";
     var picUrl="${pic}";
+    var token="${token}";
     var opt={
         username:user,
         pic:picUrl,
+        token:token,
     }
     var websocket=WebSocketClient(opt);
     $("#commitMsg").click(function(){

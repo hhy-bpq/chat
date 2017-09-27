@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
@@ -35,6 +36,7 @@ public class SysPerson extends BaseBean{
 	@Column(name = "avatar")
 	private String avatar;
 	
+	@JSONField(serialize=false)  
 	@OneToMany(mappedBy = "person")
     private Set<SysUser> userSet;
 

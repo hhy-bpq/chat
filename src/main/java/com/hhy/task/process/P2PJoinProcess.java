@@ -37,5 +37,9 @@ public class P2PJoinProcess implements TaskProcess{
 		}
 		
 	}
+	@Override
+	public boolean check(MsgData msg, WebSocket socket) {
+		return false;
+	}
 
 }

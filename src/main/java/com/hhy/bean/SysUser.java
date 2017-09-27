@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
@@ -40,7 +41,8 @@ public class SysUser extends BaseBean{
 	CascadeType.ALL:以上四种都是；*/ 
 	@ManyToOne(optional = false,cascade = CascadeType.ALL/*,fetch=FetchType.EAGER*/)
     private SysPerson person;// 用户表外键
-
+	
+	@JSONField(serialize=false)  
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable( name = "sys_user_role",joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
             @JoinColumn(name = "role_id") }) //被控方表字段名
@@ -74,7 +76,6 @@ public class SysUser extends BaseBean{
 		return person;
 	}
 	
-	@JsonBackReference
 	public void setPerson(SysPerson person) {
 		this.person = person;
 	}

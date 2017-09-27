@@ -41,4 +41,10 @@ public class CloseProcess implements TaskProcess{
 		
 	}
 
+	@Override
+	public boolean check(MsgData msg, WebSocket socket) {
+		return false;
+		
+	}
+
 }

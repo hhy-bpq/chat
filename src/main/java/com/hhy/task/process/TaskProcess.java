@@ -13,8 +13,16 @@ import com.hhy.common.MsgData;
 public interface TaskProcess {
 	
 	/**
-	 * 处理
-	 * @param msg 需要处理的数据
+	 * 
+	 * @param msg
+	 * @param socket
 	 */
 	public void execute(MsgData msg,WebSocket socket) ;
+	
+	/**
+	 * 校验 socket 是否有效
+	 * @param msg
+	 * @param socket
+	 */
+	public boolean check(MsgData msg,WebSocket socket) ;
 }

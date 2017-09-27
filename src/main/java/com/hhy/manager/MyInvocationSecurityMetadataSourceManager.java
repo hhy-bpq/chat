@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import com.hhy.bean.SysPermission;
 import com.hhy.bean.SysRole;
 import com.hhy.dao.SysPermissionDao;
+import com.hhy.dao.SysRoleDao;
 
 /**
  * 路径对应的 角色
@@ -33,6 +34,8 @@ FilterInvocationSecurityMetadataSource {
 
 	@Autowired
 	private SysPermissionDao permissionDao;
+	@Autowired
+	private SysRoleDao sysRoleDao;
 
 	private HashMap<String, Collection<ConfigAttribute>> map =null;
 
@@ -47,7 +50,8 @@ FilterInvocationSecurityMetadataSource {
 		List<SysPermission> permissions = permissionDao.findAll();
 		for(SysPermission permission : permissions) {
 			array = new ArrayList<>();
-			for(SysRole role:permission.getRoleSet()) {
+			List<SysRole> list=sysRoleDao.findByPermSetName(permission.getName());
+			for(SysRole role:list) {
 				cfg = new SecurityConfig(role.getName());
 				array.add(cfg);
 			}

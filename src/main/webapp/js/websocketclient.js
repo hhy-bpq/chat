@@ -35,6 +35,7 @@ var WebSocketClient=function(options){
         msgId:"msg",
         username:"test",
         showDiv:"msgDiv",
+        token:"",
         timeDiv:"msgTime",
         pic:"../img/a1.jpg",
         type:21,//组队聊天类型
@@ -142,6 +143,7 @@ var WebSocketClient=function(options){
         "\"room\":\""+opts.room+"\"," +
         "\"tarUser\":\""+opts.tarUser+"\"," +
         "\"pic\":\""+opts.pic+"\"," +
+        "\"msg\":\""+opts.token+"\"," +
         "}";
         websocket.send(data);
     }

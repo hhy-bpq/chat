@@ -1,6 +1,8 @@
 package com.hhy.task;
 
 import org.java_websocket.WebSocket;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,8 @@ import com.hhy.task.process.TaskProcess;
  */
 @Service
 public class TaskManager {
+	
+	private static final Logger LOG =  LoggerFactory.getLogger(TaskManager.class);
 
 	@Autowired
 	private P2PJoinProcess p2pJoin;
@@ -45,9 +49,13 @@ public class TaskManager {
 			this.socket=socket;
 		}      
 		public void run() {        
-			MsgData msgData=JSON.parseObject(msg, MsgData.class);
-			TaskProcess process=getProcess(msgData);
-			process.execute(msgData, socket);
+			try {
+				MsgData msgData=JSON.parseObject(msg, MsgData.class);
+				TaskProcess process=getProcess(msgData);
+				process.execute(msgData, socket);
+			} catch (Exception e) {
+				LOG.error("TaskManager error: \t"+e);
+			}
 
 		}  
 		private TaskProcess getProcess(MsgData msgData) {
